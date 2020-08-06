@@ -29,7 +29,7 @@ func main() {
 		job.EventErr("db connection", err)
 		os.Exit(1)
 	}
-
+	//-----
 	goose.SetDialect("mysql")
 	err = goose.Up(db.GetDB().DB, "./migrations")
 	if err != nil {
