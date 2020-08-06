@@ -41,10 +41,10 @@
           <b-icon icon="close"></b-icon>
           <span>Delete</span>
         </button>
-        <button class="button field is-info" @click="add">
-          <b-icon icon="close"></b-icon>
-          <span>Add</span>
-        </button>
+<!--        <button class="button field is-info" @click="add">-->
+<!--          <b-icon icon="close"></b-icon>-->
+<!--          <span>Add</span>-->
+<!--        </button>-->
       </b-field>
 
       <b-tab-item label="Checked rows">

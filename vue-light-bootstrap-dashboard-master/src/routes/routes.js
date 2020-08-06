@@ -24,6 +24,7 @@ import AddCourse from 'src/pages/AddCourse.vue'
 import ListOfCourses from 'src/pages/Admin/ListOfCourses.vue'
 import ListOfCustomers from 'src/pages/Admin/ListOfCustomers.vue'
 import ListOfOrders from 'src/pages/Admin/ListOfOrders'
+import AddCustomer from 'src/pages/Admin/AddCustomer'
 
 const routes = [
   {
@@ -143,6 +144,14 @@ const routes = [
         path: '/list_of_orders',
         name: 'ListOfOrders',
         component: ListOfOrders,
+        meta: {
+          requiresAuth: true
+        }
+      },
+      {
+        path: '/list_of_customers/add_customer',
+        name: 'AddCustomer',
+        component: AddCustomer,
         meta: {
           requiresAuth: true
         }

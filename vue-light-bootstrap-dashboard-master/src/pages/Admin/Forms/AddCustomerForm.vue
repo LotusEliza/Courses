@@ -2,7 +2,7 @@
   <div>
   <card>
     <div slot="header">
-      <h4 class="card-title bold">Edit Profile</h4>
+      <h4 class="card-title bold">Add customer Form</h4>
       <br>
     </div>
 
@@ -124,7 +124,6 @@
           </section>
         </ValidationObserver>
       </form>
-
   </card>
 
   </div>
@@ -133,7 +132,7 @@
 <script>
   import Card from 'src/components/Cards/Card.vue'
   import {mapGetters} from "vuex";
-  import BInputWithValidation from "../../components/InputsValidation/BInputWithValidation";
+  import BInputWithValidation from "../../../components/InputsValidation/BInputWithValidation";
 
   import { extend } from 'vee-validate';
   import { required, confirmed } from 'vee-validate/dist/rules';

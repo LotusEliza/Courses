@@ -1,15 +1,22 @@
 <template>
-  <section>
+  <section class="px-5">
     customers::{{customers[0]}}
-    <Table :data="customers"
-           :columns="columns"
-           @update="updateCustomer"
-           @add="addCustomer"
-           @delete="deleteCustomer">
-      <!--      <p>I'm a slot title</p>-->
+    <card v-bind:style=" show ? 'background-color: #f2f2f2;' : 'background-color: white;'">
+      <div slot="header">
+        <h3  class="card-title bold">List of Customers</h3>
+        <br>
+      </div>
+      <Table :data="customers"
+             :columns="columns"
+             @update="updateCustomer"
+             @add="addCustomer"
+             @delete="deleteCustomer">
+        <!--      <p>I'm a slot title</p>-->
 
 
-    </Table>
+      </Table>
+    </card>
+    <add-customer-form></add-customer-form>
   </section>
 </template>
 
@@ -17,10 +24,12 @@
 import Table from "@/pages/Admin/Table";
 import {mapGetters} from "vuex";
 import {ToastProgrammatic as Toast} from "buefy";
+import AddCustomerForm from "@/pages/Admin/Components/AddCustomerForm";
 
 export default {
   name: "ListOfCustomers",
   components: {
+    AddCustomerForm,
     Table
   },
   data () {
@@ -85,6 +94,8 @@ export default {
     addCustomer(value){
       console.log("Add! customer from child in parent!!!")
       console.log(value)
+      this.$router.push({ name: 'AddCustomer' })
+
     }
   }
 }
