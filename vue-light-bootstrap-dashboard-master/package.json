@@ -1,0 +1,52 @@
+{
+  "name": "vue-light-bootstrap-dashboard",
+  "version": "2.0.0",
+  "private": true,
+  "description": "Vue light bootstrap dashboard",
+  "author": "cristijora <joracristi@gmail.com>",
+  "scripts": {
+    "serve": "vue-cli-service serve --open",
+    "build": "vue-cli-service build",
+    "e2e": "node test/e2e/runner.js",
+    "lint": "vue-cli-service lint",
+    "dev": "vue-cli-service serve --open",
+    "lint-fix": "vue-cli-service lint --fix"
+  },
+  "dependencies": {
+    "@algoz098/vue-player": "^0.4.3",
+    "axios": "^0.19.2",
+    "bootstrap": "^4.3.1",
+    "buefy": "^0.8.20",
+    "chartist": "^0.11.0",
+    "chunk": "0.0.2",
+    "core-js": "^2.0.0",
+    "google-maps": "^3.2.1",
+    "jquery": "^3.5.0",
+    "lodash": "^4.17.19",
+    "register-service-worker": "^1.5.2",
+    "v-tooltip": "^2.0.0-rc.33",
+    "vee-validate": "^3.3.7",
+    "vue": "^2.6.6",
+    "vue-cookies": "^1.7.0",
+    "vue-lodash": "^2.1.2",
+    "vue-player": "^1.0.2",
+    "vue-router": "^3.0.2",
+    "vue2-google-maps": "^0.8.4",
+    "vuex": "^3.2.0"
+  },
+  "devDependencies": {
+    "@fortawesome/fontawesome-free": "^5.13.0",
+    "@vue/cli-plugin-babel": "^3.4.0",
+    "@vue/cli-plugin-eslint": "^3.4.0",
+    "@vue/cli-plugin-pwa": "^3.4.0",
+    "@vue/cli-service": "^3.4.0",
+    "node-sass": "^4.14.0",
+    "sass-loader": "^7.3.1",
+    "vue-template-compiler": "^2.6.6"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 11"
+  ]
+}
