@@ -165,7 +165,7 @@
           newPass: '',
           confirmNewPass: '',
         },
-        show: false,
+        show: true,
         password_reveal: '',
         refer: "password",
         isComponentModalRestoreActive: false,

@@ -47,7 +47,7 @@
 
 
 <!--------------------------------------------    PASSWORD CHANGE FORM------------------------------------------------>
-  <card v-bind:style=" show ? 'background-color: #f2f2f2;' : 'background-color: white;'">
+  <card v-bind:style="show ? 'background-color: #f2f2f2;' : 'background-color: white;'">
     <div slot="header">
       <h3  class="card-title bold">Вход</h3>
       <br>

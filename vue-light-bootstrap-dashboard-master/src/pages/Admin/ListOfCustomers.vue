@@ -1,6 +1,6 @@
 <template>
   <section class="px-5">
-    customers::{{customers[0]}}
+<!--    customers::{{customers[0]}}-->
     <card v-bind:style=" show ? 'background-color: #f2f2f2;' : 'background-color: white;'">
       <div slot="header">
         <h3  class="card-title bold">List of Customers</h3>
@@ -34,6 +34,7 @@ export default {
   },
   data () {
     return {
+      show: true,
       columns: [
         {
           field: 'ID',

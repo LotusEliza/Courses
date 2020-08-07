@@ -50,6 +50,11 @@ import Vuex from 'vuex'
 import VueLodash from 'vue-lodash'
 import lodash from 'lodash'
 
+//vue-tel-input
+import VueTelInput from 'vue-tel-input'
+
+Vue.use(VueTelInput)
+
 // import ModalSessionOver from 'components/Modals/ModalSessionOver.vue';
 // Vue.component('ModalSessionOver', ModalSessionOver);
 
@@ -99,6 +104,8 @@ export const router = new VueRouter({
     }
   }
 })
+
+
 
 
 
