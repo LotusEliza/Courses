@@ -57,8 +57,12 @@
                 <vue-tel-input v-model="user.tel"
                                v-bind="bindProps"
                                @validate="yourValidationMethod"
+                               :class="dynamicClass"
 
                 ></vue-tel-input>
+                <p :class="help, is_danger" v-if="dynamicClass === 'is-danger'">
+                  This field is required
+                </p>
                 <!--                <b-field label="Tel">-->
                 <!--                  <BInputWithValidation rules="required|min:13"-->
                 <!--                                        placeholder=""-->
@@ -202,6 +206,10 @@ export default {
       password_reveal: true,
       refer: "password",
       // isComponentModalRestoreActive: false,
+      // isValid: false,
+      dynamicClass: '',
+      is_danger: 'is-danger',
+      help: 'help'
       }
   },
   computed: {
@@ -214,6 +222,12 @@ export default {
       console.log("yourValidationMethod")
       console.log(number)
       console.log(isValid)
+      // this.isValid = isValid
+      if (isValid === true){
+        this.dynamicClass = 'is-success'
+      }else if(isValid === false && number.input !== ""){
+        this.dynamicClass = 'is-danger'
+      }
       // console.log(country)
       return false
       // Do stuff with the arguments passed by the vue-tel-input component
@@ -236,5 +250,23 @@ export default {
   border-right-color: rgb(102, 175, 233);
   border-bottom-color: rgb(102, 175, 233);
   border-left-color: rgb(102, 175, 233);
+}
+
+.is-danger {
+  border-color: #ff3860;
+}
+
+.is-success {
+  border-color: #23d160;
+}
+.vue-tel-input[data-v-31b4a26e]:focus-within {
+  border-color: #7957d5 !important;
+  box-shadow: 0 0 0 0.125em rgba(255, 56, 96, 0.25) !important;
+}
+.help {
+  display: block;
+  font-size: 0.75rem;
+  margin-top: 0.25rem;
+  color: #ff3860;
 }
 </style>
