@@ -17,10 +17,11 @@
 
 <!--    <h4 class="card-title">Please add a customer</h4>-->
     Рекомендуем установить надежный пароль.
+
     <b-button class="btn btn-info btn-fill float-right" @click.prevent="show=!show" v-if="!show" >
       Add Customer
     </b-button>
-    <b-button class="btn btn-info btn-fill float-right" @click.prevent="show=!show" v-if="show">
+    <b-button class="btn btn-info btn-fill float-right" @click.prevent="cleanFields" v-if="show">
       Close
     </b-button>
     <form v-if="show">
@@ -61,7 +62,7 @@
 
                 ></vue-tel-input>
                 <p :class="help, is_danger" v-if="dynamicClass === 'is-danger'">
-                  This field is required
+                  {{ errorStr }}
                 </p>
                 <!--                <b-field label="Tel">-->
                 <!--                  <BInputWithValidation rules="required|min:13"-->
@@ -118,14 +119,14 @@
   <!--            <b-button type="is-text" @click="remindPassword()">Forgot password</b-button>-->
   <!--          </div>-->
 
-            <div class="row">
-              <b-button class="btn btn-info btn-fill float-right" @click="validate().then(savePassword)" :disabled='!isComplete'>
+            <div class="row buttons pt-3">
+              <b-button class="btn btn-info btn-fill float-right" @click="validate().then(addCustomer)" :disabled='!isComplete'>
                 <!--              <b-button class="btn btn-info btn-fill float-right" @click.prevent="validate().then(savePassword)" disabled>-->
                 Add Customer
               </b-button>
-              <b-button class="btn btn-info btn-fill float-right" @click.prevent="show=!show" v-if="show">
-                Cancel
-              </b-button>
+<!--              <b-button class="btn btn-info btn-fill float-right" @click.prevent="cleanFields" v-if="show">-->
+<!--                Cancel-->
+<!--              </b-button>-->
             </div>
 
           </section>
@@ -178,17 +179,19 @@ export default {
           confirmPass: '',
         },
         bindProps: {
+          // onlyCountries: ['UK', 'USA'],
+          validCharactersOnly: true,
           mode: "international",
-          defaultCountry: "FR",
-          disabledFetchingCountry: false,
+          defaultCountry: "UK",
+          disabledFetchingCountry: true,
           disabled: false,
           disabledFormatting: false,
           placeholder: "Enter a phone number",
           required: true,
-          enabledCountryCode: false,
+          enabledCountryCode: true,
           enabledFlags: true,
-          preferredCountries: ["AU", "BR"],
-          onlyCountries: [],
+          // preferredCountries: ["AU", "BR"],
+          onlyCountries: ["US", "UA", "TR"],
           ignoredCountries: [],
           autocomplete: "off",
           name: "telephone",
@@ -209,7 +212,8 @@ export default {
       // isValid: false,
       dynamicClass: '',
       is_danger: 'is-danger',
-      help: 'help'
+      help: 'help',
+      errorStr: ""
       }
   },
   computed: {
@@ -222,16 +226,46 @@ export default {
       console.log("yourValidationMethod")
       console.log(number)
       console.log(isValid)
-      // this.isValid = isValid
+
       if (isValid === true){
         this.dynamicClass = 'is-success'
       }else if(isValid === false && number.input !== ""){
+        this.errorStr = "This field is required"
         this.dynamicClass = 'is-danger'
       }
+      // else if (isValid === false && number.input !== "" && !this.phoneValidator()){
+      //   this.errorStr = "This field must contain only numbers"
+      //   this.dynamicClass = 'is-danger'
+      // }
       // console.log(country)
       return false
       // Do stuff with the arguments passed by the vue-tel-input component
     },
+    addCustomer(event){
+      // this.phoneValidator()
+      // if(this.user.tel)
+        // this.$emit('add')
+    },
+    cleanFields(){
+      this.show=!this.show
+      this.user.name = ''
+      this.user.tel = ''
+      this.user.email = ''
+      this.user.password = ''
+      this.user.confirmPass = ''
+    }
+    // phoneValidator () {
+    //   let phoneno = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
+    //   this.user.tel = this.user.tel.replace(/[\s\/]/g, '')
+    //   if (this.user.tel.match(phoneno)) {
+    //     console.log('Phone is true')
+    //     return true
+    //   }
+    //   else {
+    //     console.log('Phone is false')
+    //     return false
+    //   }
+    // }
   }
 }
 </script>
@@ -269,4 +303,12 @@ export default {
   margin-top: 0.25rem;
   color: #ff3860;
 }
+.btn {
+  padding: 5px 10px 5px 10px !important;
+}
+
+section div.buttons{
+  padding-left: 15px;
+}
+
 </style>
