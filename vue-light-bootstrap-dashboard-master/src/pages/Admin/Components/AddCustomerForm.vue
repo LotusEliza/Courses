@@ -170,7 +170,7 @@ export default {
   },
   data () {
     return {
-        show: true,
+        show: false,
         user: {
           name: '',
           tel: '',
@@ -242,6 +242,8 @@ export default {
       // Do stuff with the arguments passed by the vue-tel-input component
     },
     addCustomer(event){
+      this.user.tel = this.user.tel.replace(/[\s\/]/g, '')
+      this.$store.dispatch('customers/saveCustomer', this.user);
       // this.phoneValidator()
       // if(this.user.tel)
         // this.$emit('add')

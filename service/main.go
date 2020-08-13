@@ -68,6 +68,7 @@ func main() {
 	router.Post("/customer_remove", handlers.CustomerRemove)
 	router.Post("/course_remove", handlers.CourseRemove)
 	router.Post("/order_remove", handlers.OrderRemove)
+	router.Post("/save_customer", handlers.SaveCustomer)
 
 	var (
 		port     string

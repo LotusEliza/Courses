@@ -950,7 +950,6 @@ func CustomersGet(ctx *crsctx.Ctx, rw web.ResponseWriter, req *web.Request) {
 	job.Complete(health.Success)
 }
 
-
 func CustomerRemove(rw web.ResponseWriter, req *web.Request) {
 	var (
 		err      error
@@ -989,6 +988,52 @@ func CustomerRemove(rw web.ResponseWriter, req *web.Request) {
 	response.Error("", rw)
 	job.Complete(health.Success)
 }
+
+func SaveCustomer(rw web.ResponseWriter, req *web.Request) {
+
+	var (
+		err          error
+		itemCustomer *models.Info
+	)
+
+	job := streams.NewJob("SaveCustomer")
+
+	current := time.Now()
+	itemCustomer = &models.Info{
+		DateCreate: current.Format("2006-01-02T15:04:05.000"),
+	}
+
+	ba, err := ioutil.ReadAll(req.Body)
+	if err != nil {
+		job.EventErr("SaveCustomer error: ", err)
+		response.Error(response.ERROR_NO_SUCH_USER, rw)
+		return
+	}
+
+	err = json.Unmarshal(ba, itemCustomer)
+	if err != nil {
+		job.EventErr("SaveCustomer error: ", err)
+		response.ErrorBadRequest(response.ERROR_REQUEST_DATA, rw)
+		return
+	}
+
+	session := db.GetSession()
+	_, err = session.
+		InsertInto(models.CustomersTableName).
+		Columns(models.CustomerColumns...).
+		Record(itemCustomer).
+		Exec()
+	if err != nil {
+		response.ErrorInternalServer(response.ERROR_DBERROR, rw)
+		job.EventErr("SaveCustomer error insert:", err)
+		return
+	}
+
+	response.Error("", rw)
+	job.Complete(health.Success)
+
+}
+
 //************************************************VIBER**********************************************
 //
 ////-------------------------------------------------------------------------------------------------
