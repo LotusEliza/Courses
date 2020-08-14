@@ -1,3 +1,5 @@
+import {ToastProgrammatic as Toast} from "buefy";
+import {router} from "@/main";
 
 export default {
   namespaced: true,
@@ -33,6 +35,25 @@ export default {
         return 'OK';
         // console.log("Removed user")
       }
+    },
+    async saveCustomer({commit, state}, user){
+      let response = await window.axios.post('/save_customer',
+        {
+          Name: user.name,
+          Tel: user.tel,
+          Email: user.email,
+          Password: user.password,
+        },
+        {withCredentials: true});
+      if (response.status == 200 || response.status == 204) {
+        if (response.data.Error === "ERROR_REQUEST_DATA") {
+          console.log("Mistake data request!")
+          // commit('REMOVE_CODE_ACTIVE');
+        }else{
+          console.log("Inserted new customer")
+        }
+      }
+
     },
   }
 }

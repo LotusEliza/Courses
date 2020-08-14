@@ -37,15 +37,17 @@ export default {
         Vue.set(response.data.Items[i], "Activated", false);
         Vue.set(response.data.Items[i], "Completed", false);
       }
-      for (let i = 0; i < state.activated.length; i++) {
-      for (let j = 0; j < response.data.Items.length; j++) {
-        if (response.data.Items[j].ID === state.activated[i].ID){
-          response.data.Items[i].Activated = true
-          if (response.data.Items[j].ID === state.activated[i].ID && state.activated[i].Completed){
-            response.data.Items[i].Completed = true
+      if( state.activated){
+        for (let i = 0; i < state.activated.length; i++) {
+          for (let j = 0; j < response.data.Items.length; j++) {
+            if (response.data.Items[j].ID === state.activated[i].ID){
+              response.data.Items[i].Activated = true
+              if (response.data.Items[j].ID === state.activated[i].ID && state.activated[i].Completed){
+                response.data.Items[i].Completed = true
+              }
+            }
           }
         }
-      }
       }
       commit('SET_COURSES', response.data.Items);
     },

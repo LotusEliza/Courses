@@ -1006,7 +1006,7 @@ func SaveCustomer(rw web.ResponseWriter, req *web.Request) {
 	ba, err := ioutil.ReadAll(req.Body)
 	if err != nil {
 		job.EventErr("SaveCustomer error: ", err)
-		response.Error(response.ERROR_NO_SUCH_USER, rw)
+		response.Error(response.ERROR_REQUEST_DATA, rw)
 		return
 	}
 
@@ -1016,6 +1016,8 @@ func SaveCustomer(rw web.ResponseWriter, req *web.Request) {
 		response.ErrorBadRequest(response.ERROR_REQUEST_DATA, rw)
 		return
 	}
+	hash, _ := HashPassword(itemCustomer.Password)
+	itemCustomer.Password = hash
 
 	session := db.GetSession()
 	_, err = session.
@@ -1028,10 +1030,8 @@ func SaveCustomer(rw web.ResponseWriter, req *web.Request) {
 		job.EventErr("SaveCustomer error insert:", err)
 		return
 	}
-
 	response.Error("", rw)
 	job.Complete(health.Success)
-
 }
 
 //************************************************VIBER**********************************************

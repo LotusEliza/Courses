@@ -1,5 +1,6 @@
 <template>
   <div class="content">
+    course_id::{{course_id}}
     <div class="container-fluid">
       <div class="row">
         <div class="col-12">
@@ -36,6 +37,8 @@
 
 <script>
 
+    import {mapGetters} from "vuex";
+
     export default {
       name: "Course.vue",
       data () {
@@ -48,6 +51,9 @@
         // this.course = this.course()
       },
       computed: {
+        ...mapGetters("videos", [
+          'current_videos'
+        ]),
         course() {
           return this.$store.getters['courses/courseById'](this.$route.params.id_course)
         },
