@@ -19,8 +19,20 @@ export default {
       let video = state.videos.find(v => v.Sequence === sequence);
       return video.ID
     },
-    current_video_by_course_id: (state)=> (courseId) => {
-      return state.current_videos.find(current_video => current_video.IdCourse === courseId)
+    current_video_by_course_id: (state, commit) => (courseId) => {
+      let current_video = {"IdCustomer": localStorage.getItem('UserID'), "IdVideo": 1, "IdCourse": courseId, "CurrentVideo": 1, "Completed": 0}
+      if(state.current_videos){
+        let current_video = state.current_videos.find(current_video => current_video.IdCourse === courseId)
+        if(current_video){
+          return current_video
+        }else {
+          // commit('SET_CURRENT_VIDEOS', state.current_videos.push(current_video));
+          return current_video
+        }
+      }else {
+        // commit('SET_CURRENT_VIDEOS', current_video);
+        return current_video
+      }
     },
     current_watching_video: state => state.current_watching_video,
     // get_video_by_course_id: (state)=> (courseId) => {
@@ -88,7 +100,18 @@ export default {
         Id: Number(id),
       });
       if (response.status == 200 || response.status == 204) {
-        commit('SET_CURRENT_VIDEOS', response.data.Items);
+
+        //
+        // console.log("getCurrentVideos id")
+        // console.log(id)
+        // if(response.data.Items === null){
+          commit('SET_CURRENT_VIDEOS', response.data.Items);
+        // }else {
+        //   // let array = [{"IdCustomer": 18, "IdVideo": 1, "IdCourse": 18, "CurrentVideo": 1, "Completed": 0}]
+        //    console.log(id)
+        //
+        // }
+
       }
     },
     async updateCurrentVideo({commit, getters}, id_course){

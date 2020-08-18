@@ -48,8 +48,18 @@ export default {
       if (response.status == 200 || response.status == 204) {
         if (response.data.Error === "ERROR_REQUEST_DATA") {
           console.log("Mistake data request!")
+          Toast.open({
+            message: "Some problem occurred. please try again!",
+            position: "is-top-right",
+            type:"is-danger",
+          })
           // commit('REMOVE_CODE_ACTIVE');
         }else{
+          Toast.open({
+            message: "Customer inserted!",
+            position: "is-top-right",
+            type:"is-success",
+          });
           console.log("Inserted new customer")
         }
       }

@@ -25,8 +25,6 @@
       Close
     </b-button>
     <form v-if="show">
-
-
         <br>
         <hr>
         user::{{user}}
@@ -43,11 +41,9 @@
                 </b-field>
               </div>
 
-
-
               <div class="col-md-4">
                 <b-field label="Email">
-                  <BInputWithValidation rules="required"
+                  <BInputWithValidation rules="required|email"
                                         placeholder="Email"
                                         v-model="user.email"
                   />
@@ -64,12 +60,7 @@
                 <p :class="help, is_danger" v-if="dynamicClass === 'is-danger'">
                   {{ errorStr }}
                 </p>
-                <!--                <b-field label="Tel">-->
-                <!--                  <BInputWithValidation rules="required|min:13"-->
-                <!--                                        placeholder=""-->
-                <!--                                        v-model="user.tel"-->
-                <!--                  />-->
-                <!--                </b-field>-->
+
               </div>
             </div>
 
@@ -143,7 +134,7 @@ import {mapGetters} from "vuex";
 import BInputWithValidation from "../../../components/InputsValidation/BInputWithValidation";
 
 import { extend } from 'vee-validate';
-import { required, confirmed } from 'vee-validate/dist/rules';
+import {required, confirmed, email} from 'vee-validate/dist/rules';
 import {ValidationObserver} from "vee-validate/dist/vee-validate.full";
 import cookie from "vue-cookies";
 import clone from 'lodash/clone'
@@ -159,6 +150,12 @@ extend('confirmed', {
   ...confirmed,
   message: 'Not matching'
 });
+// Add the email rule
+extend('email', {
+  ...email,
+  message: 'This field must be a valid email'
+});
+
 
 export default {
   name: "AddCustomerForm",
@@ -182,7 +179,7 @@ export default {
           // onlyCountries: ['UK', 'USA'],
           validCharactersOnly: true,
           mode: "international",
-          defaultCountry: "UK",
+          defaultCountry: "UA",
           disabledFetchingCountry: true,
           disabled: false,
           disabledFormatting: false,
@@ -191,7 +188,7 @@ export default {
           enabledCountryCode: true,
           enabledFlags: true,
           // preferredCountries: ["AU", "BR"],
-          onlyCountries: ["US", "UA", "TR"],
+          onlyCountries: ["UA", "US", "TR"],
           ignoredCountries: [],
           autocomplete: "off",
           name: "telephone",
@@ -241,9 +238,10 @@ export default {
       return false
       // Do stuff with the arguments passed by the vue-tel-input component
     },
-    addCustomer(event){
+    async addCustomer(event){
       this.user.tel = this.user.tel.replace(/[\s\/]/g, '')
-      this.$store.dispatch('customers/saveCustomer', this.user);
+      await this.$store.dispatch('customers/saveCustomer', this.user).then(() => this.cleanFields());
+      // this.$store.dispatch('customers/saveCustomer', this.user);
       // this.phoneValidator()
       // if(this.user.tel)
         // this.$emit('add')
@@ -312,5 +310,6 @@ export default {
 section div.buttons{
   padding-left: 15px;
 }
+
 
 </style>

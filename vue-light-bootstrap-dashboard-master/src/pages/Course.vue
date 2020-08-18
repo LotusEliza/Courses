@@ -1,6 +1,7 @@
 <template>
   <div class="content">
     course_id::{{course_id}}
+    current_video::{{current_video}}
     <div class="container-fluid">
       <div class="row">
         <div class="col-12">
