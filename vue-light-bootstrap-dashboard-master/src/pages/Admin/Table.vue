@@ -33,14 +33,24 @@
       </b-tab-item>
 <!--      ---------------------------------------Buttons------------------------------>
       <b-field grouped group-multiline>
-        <button class="button field is-info" @click="update">
-          <b-icon icon="close"></b-icon>
-          <span>Update</span>
-        </button>
-        <button class="button field is-info" @click="confirmRemove">
-          <b-icon icon="close"></b-icon>
-          <span>Delete</span>
-        </button>
+
+        <b-button class="btn btn-info field btn-fill" @click="update">
+          <!--              <b-button class="btn btn-info btn-fill float-right" @click.prevent="validate().then(savePassword)" disabled>-->
+          Update
+        </b-button>
+        <b-button class="btn btn-info field btn-fill" @click="confirmRemove">
+          <!--              <b-button class="btn btn-info btn-fill float-right" @click.prevent="validate().then(savePassword)" disabled>-->
+          Delete
+        </b-button>
+
+<!--        <button class="button field is-info" @click="update">-->
+<!--          <b-icon icon="close"></b-icon>-->
+<!--          <span>Update</span>-->
+<!--        </button>-->
+<!--        <button class="button field is-info" @click="confirmRemove">-->
+<!--          <b-icon icon="close"></b-icon>-->
+<!--          <span>Delete</span>-->
+<!--        </button>-->
 <!--        <button class="button field is-info" @click="add">-->
 <!--          <b-icon icon="close"></b-icon>-->
 <!--          <span>Add</span>-->
@@ -116,6 +126,11 @@ export default {
 }
 .pagination .pagination-next, .pagination .pagination-previous {
   margin-top: -12px !important;
+}
+
+.pagination-link.is-current {
+  background-color: #43d0ed;
+  border-color: #43d0ed;
 }
 
 </style>

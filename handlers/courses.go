@@ -75,7 +75,7 @@ func ActivatedCoursesGet(ctx *crsctx.Ctx, rw web.ResponseWriter, req *web.Reques
 	_, err = session.
 		Select("customer_course.id_course, customer_course_video.completed").
 		From(models.CustomerCourseTableName).
-		LeftJoin(models.CustomerCourseVideoTableName, "customer_course.id_course=customer_course_video.id_course").
+		LeftJoin(models.CustomerCourseVideoTableName, "customer_course.id_course=customer_course_video.id_course AND customer_course.id_customer = customer_course_video.id_customer").
 		Where("customer_course.id_customer=?", itemInfo.ID).
 		Load(&resp.Items)
 	if err != nil {
@@ -94,7 +94,7 @@ func ActivatedCoursesGet(ctx *crsctx.Ctx, rw web.ResponseWriter, req *web.Reques
 
 func CourseRemove(rw web.ResponseWriter, req *web.Request) {
 	var (
-		err      error
+		err        error
 		CourseItem *models.Course
 	)
 

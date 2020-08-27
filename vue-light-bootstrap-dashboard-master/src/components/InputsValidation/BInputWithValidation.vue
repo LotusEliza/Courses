@@ -71,10 +71,14 @@ export default {
 </script>
 
 <style>
-input {
-  background-image:  none !important;
-}
-div#__lpform_input_idx_3 img, div#__lpform_password img, div#__lpform_input_idx_7 img {
-  display: none !important;
+/*input {*/
+/*  background-image:  none !important;*/
+/*}*/
+/*div#__lpform_input_idx_3 img, div#__lpform_password img, div#__lpform_input_idx_7 img {*/
+/*  display: none !important;*/
+/*}*/
+#__lpform_input_idx_4 > img, #__lpform_input_idx_8 > img {
+  /*#__lpform_input_idx_4_icon img {*/
+  display: none;
 }
 </style>

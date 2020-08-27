@@ -303,13 +303,12 @@ export default {
   margin-top: 0.25rem;
   color: #ff3860;
 }
-.btn {
-  padding: 5px 10px 5px 10px !important;
-}
 
 section div.buttons{
   padding-left: 15px;
 }
 
-
+/*img {*/
+/*  display: none !important;*/
+/*}*/
 </style>
