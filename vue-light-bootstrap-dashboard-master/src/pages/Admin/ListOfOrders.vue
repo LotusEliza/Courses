@@ -64,9 +64,10 @@ export default {
     ]),
   },
   methods:{
-    updateOrder(value){
+    updateOrder(orders){
       console.log("Update Order from child in parent!!!")
-      console.log(value)
+      console.log(orders)
+      this.$router.push({ name: 'UpdateOrder',  params: {id: 2 }})
     },
     // deleteOrder(value){
     //   console.log("Delete! Order from child in parent!!!")
